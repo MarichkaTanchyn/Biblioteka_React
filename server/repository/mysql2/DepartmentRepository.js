@@ -69,7 +69,7 @@ exports.getDepartmentById = async (deptId) => {
             "e.Name as EmpName, e.LastName, e.Email FROM Department dept left join Employment empl on empl.Dept_id = dept.Dept_id left join Employee e on empl.Employee_id = e.Employee_id where dept.Dept_id = ?";
         const results = await dbHandler.query(query, [deptId]);
 
-        const firstrow = results[0][0];
+        const firstrow = results[0];
         if (!firstrow) {
             return {};
         }
@@ -81,7 +81,7 @@ exports.getDepartmentById = async (deptId) => {
             employments: []
         }
         for (let i = 0; i < results[0].length; i++) {
-            const row = results[0][i];
+            const row = results[i];
             if (row.empl_id != null) {
                 const employment = {
                     id: row.empl_id,
