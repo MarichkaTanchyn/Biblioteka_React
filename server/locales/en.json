@@ -1,0 +1,149 @@
+{
+	"main-page": {
+		"content": "Main Page",
+		"loginEmail": "Email:",
+		"loginPassword": "Password:",
+		"loggedIn": "Logged in as: ",
+		"logOut": "Log Out",
+		"login": "Login",
+		"info": "The site is currently in English.",
+		"text": "Journal \"New Library. Services, Information Technologies and Media\"    (in the years 1998-2002 and 2010-2014 \"New Library. Notebooks Monographic Scientific Society of Librarians of the University of Silesia \") is published as a semi-annual (in 2015-2019 it was published with quarterly). In 2016, the periodical became official a scientific body of the Institute of Library Science and Scientific Information Of the University of Silesia in Katowice, and from 2020 it appears under the auspices of the Institute of Cultural Sciences of the University of Silesia in Katowice. \"Nowa Biblioteka\" is announced by the Publishing House\n    Of the University of Silesia on the basis of Creative Commons (CC BY-SA 4.0) 2018, the electronic version is the reference form. \n\n Articles, announcements, reports are published in the semi-annual,reviews and discussions of research workers and library employees, information centers, archives, museums, etc., PhD students, students. The editorial office of the journal does not charge any fees from the authors for publications."
+	},
+	"nav": {
+		"main-page": "Main page",
+		"employees": "Employees",
+		"departments": "Departments",
+		"employments": "Employments"
+	},
+	"list": {
+		"actions": {
+			"title": "Actions",
+			"details": "Details",
+			"edit": "Edit",
+			"delete": "Delete"
+		}
+	},
+	"form": {
+		"actions": {
+			"return": "Return",
+			"edit": "Edit",
+			"cancel": "Cancel"
+		}
+	},
+	"emp": {
+		"fields": {
+			"firstName": "First name",
+			"lastName": "Last name",
+			"email": "Email",
+			"password": "Password",
+			"actions": "Akcje"
+		},
+		"list": {
+			"title": "Employees",
+			"addNew": "Add new employee",
+			"noData": "No employees in database",
+			"pageTitle": "List of employees"
+		},
+		"form": {
+			"employment": "History of employment",
+			"add": {
+				"pageTitle": "Adding a new employee",
+				"btnLabel": "Add the employee",
+				"confirm": {
+					"header": "Confirmation",
+					"text": "The new employee has been successfully created"
+				},
+				"bntLabel": "Add"
+			},
+			"edit": {
+				"pageTitle": "Editing an employee",
+				"btnLabel": "Save changes",
+				"confirm": {
+					"header": "Confirmation",
+					"text": "The employee has been successfully updated"
+				},
+				"bntLabel": "Save changes",
+				"department": "Department",
+				"dateOfEmployment": "Date Of Employment",
+				"phoneNumber": "PhoneNumber"
+			}
+		}
+	},
+	"dept": {
+		"fields": {
+			"Name": "Name",
+			"dateOfCreate": "Date Of Create",
+			"actions": "Akcje",
+			"name": "dept.fields.name"
+		},
+		"list": {
+			"title": "Departments",
+			"addNew": "Add new department",
+			"noData": "No departments in database",
+			"pageTitle": "List of departments"
+		},
+		"form": {
+			"name": "Name:",
+			"numOfWorkers": "Number Of Workers:",
+			"date": "Employment Date:",
+			"phoneNumber": "Phone Number:",
+			"add": {
+				"pageTitle": "Adding a new department",
+				"bntLabel": "Add the department",
+				"confirm": {
+					"header": "Confirmation",
+					"text": "The new department has been successfully created"
+				}
+			},
+			"edit": {
+				"pageTitle": "Editing a department",
+				"btnLabel": "Save changes",
+				"confirm": {
+					"header": "Confirmation",
+					"text": "The department has been successfully updated"
+				},
+				"bntLabel": "dept.form.edit.bntLabel"
+			}
+		}
+	},
+	"employment": {
+		"fields": {
+			"department": "Department",
+			"phoneNumber": "Phone Number",
+			"dateOfEmployment": "Employment Date",
+			"actions": "Akcje",
+			"firstName": "First name",
+			"lastName": "Last name"
+		},
+		"list": {
+			"title": "Employments",
+			"addNew": "Add new employment",
+			"noData": "No employments in database",
+			"pageTitle": "List of employments"
+		},
+		"form": {
+			"firstName": "First Name",
+			"lastName": "Last Name",
+			"department": "Department: ",
+			"employee": "Employee: ",
+			"phoneNumber": "Phone Number",
+			"date": "Date: ",
+			"add": {
+				"pageTitle": "Adding a new employment",
+				"confirm": {
+					"header": "Confirmation",
+					"text": "The new employment has been successfully created"
+				},
+				"bntLabel": "Add the employment"
+			},
+			"edit": {
+				"pageTitle": "Editing an employee",
+				"btnLabel": "Save changes",
+				"confirm": {
+					"header": "Confirmation",
+					"text": "The employee has been successfully updated"
+				}
+			}
+		}
+	}
+}

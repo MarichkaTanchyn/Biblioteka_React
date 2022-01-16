@@ -1,0 +1,149 @@
+{
+	"main-page": {
+		"content": "Strona główna",
+		"loginEmail": "Email:",
+		"loginPassword": "Hasło:",
+		"loggedIn": "Załogowany jako: ",
+		"logOut": "Wyloguj",
+		"login": "Zaloguj się",
+		"info": "Strona jest w języku polskim.",
+		"text": "Czasopismo \"Nowa Biblioteka. Usługi, Technologie Informacyjne i Media\"\n    (w latach 1998-2002 oraz 2010-2014 \"Nowa Biblioteka. Zeszyty\n Monograficzne Koła Naukowego Bibliotekoznawców Uniwersytetu Śląskiego\")\nukazuje się jako półrocznik (w latach 2015-2019 publikowane było z\n    częstotliwością kwartalną). W 2016 r. periodyk stał się oficjalnym\n    organem naukowym Instytutu Bibliotekoznawstwa i Informacji Naukowej\n    Uniwersytetu Śląskiego w Katowicach, a od 2020 r. ukazuje się pod\n    auspicjami Instytutu Nauk o Kulturze Uniwersytetu Śląskiego w\n    Katowicach. \"Nowa Biblioteka\" ogłaszana jest przez Wydawnictwo\n    Uniwersytetu Śląskiego na zasadach Creative Commons (CC BY-SA 4.0).Od\n    2018 r. postacią referencyjną jest wersja elektroniczna.\n    <br /><br />\n    W półroczniku publikowane są artykuły, komunikaty, sprawozdania,\n    recenzje i omówienia pracowników naukowych, pracowników bibliotek,\n    ośrodków informacji, archiwów, muzeów itp., doktorantów, studentów.\n    Redakcja czasopisma nie pobiera żadnych opłat od Autorów za publikacje."
+	},
+	"nav": {
+		"main-page": "Strona główna",
+		"employees": "Pracownicy",
+		"departments": "Departamenty",
+		"employments": "Zatrudnienie"
+	},
+	"list": {
+		"actions": {
+			"title": "Akcje",
+			"details": "Szczegóły",
+			"edit": "Edytuj",
+			"delete": "Usuń"
+		}
+	},
+	"form": {
+		"actions": {
+			"return": "Powrót",
+			"edit": "Edytuj",
+			"cancel": "Anuluj"
+		}
+	},
+	"emp": {
+		"fields": {
+			"firstName": "Imię",
+			"lastName": "Nazwisko",
+			"email": "Email",
+			"password": "Hasło",
+			"actions": "Akcje"
+		},
+		"list": {
+			"title": "Pracownicy",
+			"addNew": "Dodaj nowego pracownika",
+			"noData": "Brak pracowników w bazie",
+			"pageTitle": "Lista pracowników"
+		},
+		"form": {
+			"employment": "Historia zatrudnienia",
+			"add": {
+				"pageTitle": "Dodawanie pracownika",
+				"btnLabel": "Dodaj pracownika",
+				"confirm": {
+					"header": "Potwierdzenie operacji",
+					"text": "Pomyślnie dodano pracownika"
+				},
+				"bntLabel": "Dodaj"
+			},
+			"edit": {
+				"pageTitle": "Edycja pracownika",
+				"department": "Departament",
+				"dateOfEmployment": "Data Zatrudnienia",
+				"phoneNumber": "Numer telefonu",
+				"bntLabel": "Zapisz zmiany",
+				"confirm": {
+					"header": "Potwierdzenie operacji",
+					"text": "Pomyślnie zaktualizowano pracownika"
+				}
+			}
+		}
+	},
+	"dept": {
+		"fields": {
+			"name": "Nazwa",
+			"dateOfCreate": "Data Stworzenia",
+			"actions": "Akcje"
+		},
+		"list": {
+			"title": "Departamenty",
+			"addNew": "Dodaj nowy departament",
+			"noData": "Brak departamentów w bazie",
+			"pageTitle": "Lista departamentów"
+		},
+		"form": {
+			"name": "Nazwa:",
+			"numOfWorkers": "Ilość Pracujących:",
+			"date": "Data Zatrudnienia:",
+			"phoneNumber": "Numer Telefonu:",
+			"add": {
+				"pageTitle": "Dodawanie departamenta",
+
+				"confirm": {
+					"header": "Potwierdzenie operacji",
+					"text": "Pomyślnie dodano departament"
+				},
+				"bntLabel":  "Dodaj departament"
+			},
+			"edit": {
+				"pageTitle": "Edycja pracownika",
+				"btnLabel": "Zapisz zmiany",
+				"confirm": {
+					"header": "Potwierdzenie operacji",
+					"text": "Pomyślnie zaktualizowano pracownika"
+				}
+			}
+		}
+	},
+	"employment": {
+		"fields": {
+			"department": "Departament",
+			"firstName": "Imię",
+			"lastName": "Nazwisko",
+			"phoneNumber": "Numer Telefonu",
+			"dateOfEmployment": "Data Zatrudnienia",
+			"actions": "Akcje"
+		},
+		"list": {
+			"title": "Zatrudnienia",
+			"addNew": "Dodaj nowe zatrudnienie",
+			"noData": "Brak zatrudnień w bazie",
+			"pageTitle": "Lista zatrudnień"
+		},
+		"form": {
+			"employment": "Historia zatrudnienia",
+			"firstName": "Imie",
+			"lastName": "Nazwisko",
+			"department": "Departament: ",
+			"employee": "Pracownik: ",
+			"phoneNumber": "Numer Telefonu: ",
+			"date": "Data: ",
+			"add": {
+				"pageTitle": "Dodawanie zatrudnienia",
+				"btnLabel": "Dodaj zatrudnienie",
+				"confirm": {
+					"header": "Potwierdzenie operacji",
+					"text": "Pomyślnie dodano zatrudnienie"
+				},
+				"bntLabel": "Dodaj zatrudnienie"
+			},
+			"edit": {
+				"pageTitle": "Edycja zatrudnienia",
+				"btnLabel": "Zapisz zmiany",
+				"confirm": {
+					"header": "Potwierdzenie operacji",
+					"text": "Pomyślnie zaktualizowano zatrudnienie"
+				}
+			}
+		}
+	}
+}
