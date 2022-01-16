@@ -1,0 +1,28 @@
+html {
+    background-color: #ecf0f1;
+    font-family: sans-serif;
+}
+body {
+    min-width: 600px;
+    margin: 0%;
+    font-family: "Montserrat", sans-serif;
+    justify-content: center;
+}
+
+.main {
+    width: 80%;
+    margin: 0 10%;
+    text-align: center;
+    background: rgb(230, 230, 230);
+    border: none;
+    color: black;
+    border-radius: 15px;
+    display: flow-root;
+    margin-top: 1rem;
+}
+.main h2 {
+    padding-top: 1rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid #7f8c8d;
+    margin-bottom: 2rem;
+}

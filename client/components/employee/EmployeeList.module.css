@@ -1,0 +1,100 @@
+.main {
+    width: 80%;
+    margin: 0 10%;
+    text-align: center;
+    background: rgb(230, 230, 230);
+    border: none;
+    color: black;
+    border-radius: 15px;
+    display: flow-root;
+    margin-top: 1rem;
+}
+.main h2 {
+    padding-top: 1rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid #7f8c8d;
+    margin-bottom: 2rem;
+}
+
+.button-details,
+.button-edit,
+.button-delete {
+    display:inline-block;
+    width: 75px;
+    padding: 0.25rem 0.5rem;
+    background-color: rgb(153, 72, 72);
+}
+.button-details,
+.button-edit,
+.button-delete{
+    border: none;
+    border-radius: 5px;
+    color: white;
+    text-decoration: none;
+    text-align: center;
+    font-size: 0.8rem;
+}
+.button-details,
+.button-edit{
+    margin-right: 1rem;
+}
+
+
+.main-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    align-items: center;
+    margin-left: 3rem;
+}
+.button-submit{
+    padding-top: 2rem;
+    align-items: flex-start;
+    padding-bottom: 1.5rem;
+
+}
+
+.list-actions{
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin-right: 1rem;
+}
+.list-actions li {
+    display: inline-block;
+}
+.a-in-button {
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+    background-color: rgb(144, 55, 55);
+    padding: 0.75rem;
+    border-radius: 15px;
+    margin: 1rem;
+
+}
+.table-list{
+    border-collapse: collapse;
+    text-align: left;
+    color: #2c3e50;
+    width: 100%;
+}
+.table-list,
+.table-list th,
+.table-list td {
+    padding: 0.5rem;
+}
+
+.table-list th,
+.table-list tbody tr:nth-child(even){
+    background-color: #e4d7d4;
+}
+.button-details:hover,
+.button-edit:hover,
+.button-delete:hover,
+.a-in-button:hover{
+    background-color: rgb(119, 42, 42);
+}

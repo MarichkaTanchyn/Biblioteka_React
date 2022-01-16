@@ -1,0 +1,13 @@
+footer {
+    text-align: center;
+    height: 5rem;
+    margin-top: 5rem;
+}
+
+@media all and (max-width: 400px) {
+    footer {
+        margin: 0;
+        text-align: center;
+        align-items: center;
+    }
+}
