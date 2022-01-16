@@ -36,6 +36,9 @@ app.use(cookieParser());
 
 app.use(cookieParser('secret'));
 
+app.set('view engine', 'ejs');
+
+
 const i18n = require('i18n');
 i18n.configure({
     locales: ['en', 'pl'], // języki dostępne w aplikacji. Dla każdego z nich należy utworzyć osobny słownik
@@ -54,6 +57,14 @@ app.use((req, res, next) => {
         res.locals.lang = currentLang;
     }
     next();
+});
+app.use(function(err, req, res, next) {
+    // set locals, only providing error in development
+    res.locals.message = err.message;
+    res.locals.error = req.app.get('env') === 'development' ? err : {};
+// render the error page
+    res.status(err.status || 500);
+    res.send('error');//this or res.status(err.status || 500).send('error')
 });
 
 app.use('/api/employees', empApiRouter);

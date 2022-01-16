@@ -12,6 +12,7 @@ import DepartmentList from "./components/departments/DepartmentList";
 import EmployeeDetails from "./components/employee/EmployeeDetails";
 import EmploymentDetails from "./components/employment/EmploymentDetails";
 import DepartmentDetails from "./components/departments/DepartmentDetails";
+import EmployeeForm from "./components/employee/EmployeeForm";
 
 const App = () => {
     return (
@@ -22,6 +23,9 @@ const App = () => {
             <Route exact path="/" component={MainContent}/>
             <Route exact path="/employees" component={EmployeeList}/>
             <Route exact path="/employees/details/:Employee_id" component={EmployeeDetails} />
+            <Route exact path="/employees/edit/:Employee_id" component={EmployeeForm} />
+            <Route exact path="/employees/add" component={EmployeeForm} />
+
             <Route exact path="/employments" component={EmploymentList}/>
             <Route exact path="/departments" component={DepartmentList}/>
             <Route exact path="/employments/details/:employment_id" component={EmploymentDetails} />

@@ -16,7 +16,7 @@ const EmployeeListTableRow = (props) => {
                         <Link to={`employees/details/${emp.Employee_id}`} className={style['button-details']}>Szczegóły</Link>
                     </li>
                     <li>
-                        <Link to={`employees/edit/${emp.Employee_id}`} className={style['button-edit']} >Edytuj</Link>
+                        <Link to={`/employees/edit/${emp.Employee_id}`} className={style['button-edit']} >Edytuj</Link>
                     </li>
                     <li>
                         <Link to={`employees/delete/${emp.Employee_id}`} className={style['button-delete']}>Usuń</Link>

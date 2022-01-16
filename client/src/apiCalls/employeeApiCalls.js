@@ -10,3 +10,32 @@ export function getEmployeeByIdApiCall(empId){
     const promise = fetch(url);
     return promise;
 }
+
+export function addEmployeeApiCall(emp) {
+    const empString = JSON.stringify(emp);
+    console.log("JSON",empString);
+    const options = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: empString
+    }
+    const promise = fetch(employeeBaseURL,options);
+    return promise;
+}
+
+export function updateEmployeeApiCall(empId, emp) {
+
+    const url = employeeBaseURL + '/' +empId;
+    const empString = JSON.stringify(emp);
+    const options = {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: empString
+    }
+    const promise = fetch(url,options);
+    return promise;
+}

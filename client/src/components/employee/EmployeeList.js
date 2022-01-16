@@ -7,10 +7,12 @@ import {Link} from "react-router-dom";
 class EmployeeList extends Component {
     constructor(props) {
         super(props);
+        let notice = props.location.state && props.location.state.notice ? props.location.state.notice : '';
         this.state = {
             error: null,
             isLoaded: false,
-            employees: []
+            employees: [],
+            notice: notice
         }
     }
 
@@ -52,6 +54,7 @@ class EmployeeList extends Component {
         return <main className={style.main}>
             <h2>Lista pracowników</h2>
             {content}
+            <p>{this.state.notice}</p>
             <p className="button-submit"><Link className={style['a-in-button']} to={"/employees/add"}>Dodaj nowego
                 pracownika</Link></p>
 

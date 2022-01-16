@@ -73,16 +73,17 @@ exports.getEmployeeById = async (empId) => {
 };
 
 exports.createEmployee = async (newEmployeeData) => {
+    console.log(newEmployeeData);
     try {
-        const vRes = empSchema.validate(newEmployeeData, {abortEarly: false});
-        if (vRes.error) {
-            return Promise.reject(vRes.error);
-        }
+        // const vRes = empSchema.validate(newEmployeeData, {abortEarly: false});
+        // if (vRes.error) {
+        //     return Promise.reject(vRes.error);
+        // }
 
-        const emailError = await checkEmailUnique(newEmployeeData.Email);
-        if (emailError) {
-            return Promise.reject(emailError);
-        }
+        // const emailError = await checkEmailUnique(newEmployeeData.Email);
+        // if (emailError) {
+        //     return Promise.reject(emailError);
+        // }
 
         const EmpName = newEmployeeData.Name;
         const LastName = newEmployeeData.LastName;
