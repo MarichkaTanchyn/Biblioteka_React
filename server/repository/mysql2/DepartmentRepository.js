@@ -1,5 +1,6 @@
 const dbHandler = require('../../util/db');
 const deptSchema = require("../../model/joi/Department");
+const {ResultSetHeader} = require("mysql2");
 
 exports.getDepartments = async () => {
     try {
@@ -32,7 +33,7 @@ exports.getDepartmentsWithEmployees = async () => {
             const row = results[i];
             const department = {
                 id: row.dept_id,
-                DeptName: row.DeptName,
+                Name: row.DeptName,
                 NumOfWorkers: row.NumOfWorkers,
                 DateOfStart: row.DateOfStart,
                 employment: {
@@ -75,14 +76,13 @@ exports.getDepartmentById = async (deptId) => {
         }
         const dept = {
             id: parseInt(deptId),
-            DeptName: firstrow.DeptName,
+            Name: firstrow.DeptName,
             NumOfWorkers: firstrow.NumOfWorkers,
             DateOfStart: firstrow.DateOfStart,
-            employments: []
         }
         for (let i = 0; i < results[0].length; i++) {
             const row = results[i];
-            if (row.empl_id != null) {
+            if (row.empl_id) {
                 const employment = {
                     id: row.empl_id,
                     DataOd: row.DataOd,
@@ -94,6 +94,7 @@ exports.getDepartmentById = async (deptId) => {
                         Email: row.Email
                     }
                 };
+
                 dept.employments.push(employment);
             }
         }
@@ -109,18 +110,20 @@ exports.getDepartmentById = async (deptId) => {
     }
 };
 
-exports.createDepartment = async (newDepartmentData) => {
+exports.createDepartment = (newDepartmentData) => {
     try {
 
-        const vRes = deptSchema.validate(newDepartmentData, {abortEarly: false});
-        if (vRes.error) {
-            return Promise.reject(vRes.error);
-        }
-        const deptName = newDepartmentData.name;
-        const numOfWorkers = newDepartmentData.amountofEmp;
-        const DateOfStart = newDepartmentData.dateOfStart;
-        const sql = "INSERT INTO Department (Name, NumOfWorkers, DateOfStart) VALUES (?,?,?);"
-        return await dbHandler.execute(sql, [deptName, numOfWorkers, DateOfStart]);
+        // const vRes = deptSchema.validate(newDepartmentData, {abortEarly: false});
+        // if (vRes.error) {
+        //     return Promise.reject(vRes.error);
+        // }
+        console.log(newDepartmentData);
+
+        const deptName = newDepartmentData.Name;
+        const numOfWorkers = newDepartmentData.NumOfWorkers;
+        const DateOfStart = newDepartmentData.DateOfStart;
+        const sql = "INSERT INTO Department (Name, NumOfWorkers, DateOfStart) VALUES (?,?,?);";
+        return dbHandler.execute(sql, [deptName, numOfWorkers, DateOfStart]);
     } catch (err) {
         return Promise.reject({
             details: [{
@@ -130,7 +133,7 @@ exports.createDepartment = async (newDepartmentData) => {
             }]
         });
     }
-    ;
+
 }
 
 exports.updateDepartment = async (deptId, deptData) => {

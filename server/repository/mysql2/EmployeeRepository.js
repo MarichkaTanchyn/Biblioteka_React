@@ -20,7 +20,7 @@ exports.getEmployees = async () => {
 exports.getEmployeeById = async (empId) => {
     try {
         const query =
-            "SELECT e.Employee_id as id, e.Name as EmpName, e.LastName, e.Email, e.Password, empl.Employment_id as empl_id, " +
+            "SELECT e.Employee_id as id, e.Name as EmpName, e.LastName, e.Email, empl.Employment_id as empl_id, " +
             "empl.PhoneNumber, empl.DataOd, empl.Dept_id as dept_id, dept.Name as DeptName, dept.NumOfWorkers, dept.DateOfStart " +
             "FROM Employee e " +
             "LEFT JOIN Employment empl on empl.Employee_id = e.Employee_id " +
@@ -79,7 +79,7 @@ exports.createEmployee = async (newEmployeeData) => {
         // if (vRes.error) {
         //     return Promise.reject(vRes.error);
         // }
-
+        //
         // const emailError = await checkEmailUnique(newEmployeeData.Email);
         // if (emailError) {
         //     return Promise.reject(emailError);
@@ -88,10 +88,10 @@ exports.createEmployee = async (newEmployeeData) => {
         const EmpName = newEmployeeData.Name;
         const LastName = newEmployeeData.LastName;
         const Email = newEmployeeData.Email;
-        const Salt = authUtils.genSaltSync(8);
-        const Password = authUtils.hashPassword(newEmployeeData.Password, Salt);
-        const sql = "INSERT INTO Employee (Name, LastName, Email, Password) VALUES (?,?,?,?);"
-        return dbHandler.execute(sql, [EmpName, LastName, Email, Password]);
+        // const Salt = authUtils.genSaltSync(8);
+        // const Password = authUtils.hashPassword(newEmployeeData.Password, Salt);
+        const sql = "INSERT INTO Employee (Name, LastName, Email) VALUES (?,?,?);"
+        return dbHandler.execute(sql, [EmpName, LastName, Email]);
 
     } catch (err) {
         return Promise.reject({
@@ -107,12 +107,12 @@ exports.createEmployee = async (newEmployeeData) => {
 
 exports.updateEmployee = async (employeeId, employeeDate) => {
     try {
-        const vRes = empSchema.validate(employeeDate, {abortEarly: false});
+        // const vRes = empSchema.validate(employeeDate, {abortEarly: false});
 
-        if (vRes.error) {
-            return Promise.reject(vRes.error);
-        }
-
+        // if (vRes.error) {
+        //     return Promise.reject(vRes.error);
+        // }
+        console.log(employeeId,employeeDate);
         const EmpName = employeeDate.Name;
         const LastName = employeeDate.LastName;
         const Email = employeeDate.Email;

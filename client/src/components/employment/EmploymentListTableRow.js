@@ -19,7 +19,7 @@ const EmploymentListTableRow = (props) => {
                               className={style['button-details']}>Szczegóły</Link>
                     </li>
                     <li>
-                        <Link to={`employments/edit/${employment.id}`} className={style['button-edit']}>Edytuj</Link>
+                        <Link to={`/employments/edit/${employment.id}`} className={style['button-edit']}>Edytuj</Link>
                     </li>
                     <li>
                         <Link to={`employments/delete/${employment.id}`} className={style['button-delete']}>Usuń</Link>

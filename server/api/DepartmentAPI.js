@@ -27,7 +27,7 @@ exports.createDepartment = (req, res, next) => {
 
     DeptRepository.createDepartment(req.body)
         .then(newobj => {
-            res.status(201).json(newObj);
+            res.status(201).json(newobj);
         })
         .catch(err => {
             if (!err.statusCode) {

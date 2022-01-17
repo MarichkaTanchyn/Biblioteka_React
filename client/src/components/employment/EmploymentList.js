@@ -51,7 +51,7 @@ class EmploymentList extends Component {
         return <main className={style.main}>
             <h2>Lista zatrudnień</h2>
             {content}
-            <p className="button-submit"><Link className={style['a-in-button']} to={"/employees/add"}>Dodaj nowe zatrudnienie</Link></p>
+            <p className="button-submit"><Link className={style['a-in-button']} to={"/employments/add"}>Dodaj nowe zatrudnienie</Link></p>
 
         </main>
     }

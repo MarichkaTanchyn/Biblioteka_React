@@ -1,8 +1,9 @@
 import React, {Component} from "react";
 import style from "./Department.module.css";
 import {Link} from "react-router-dom";
-import {getEmploymentByIdApiCall} from "../../apiCalls/departmentApiCalls";
+
 import DepartmentDetailsData from "./DepartmentDetailsData";
+import {getDepartmentByIdApiCall} from "../../apiCalls/departmentApiCalls";
 
 class DepartmentDetails extends Component {
     constructor(props) {
@@ -19,7 +20,7 @@ class DepartmentDetails extends Component {
     }
 
     fetchDepartmentDetails = () => {
-        getEmploymentByIdApiCall(this.state.deptId)
+        getDepartmentByIdApiCall(this.state.deptId)
             .then(res => res.json())
             .then(
                 (data) => {

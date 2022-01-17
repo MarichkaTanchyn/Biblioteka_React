@@ -5,13 +5,13 @@ import {checkEmail, checkRequired, checkTextLengthRange} from "../../helpers/val
 import FormInput from "../form/FormInput";
 import FormButtons from "../form/FormButtons";
 import style from "./EmployeeForm.module.css";
-import {Link, Redirect} from "react-router-dom";
+import {Redirect} from "react-router-dom";
 
 class EmployeeForm extends Component {
     constructor(props) {
         super(props);
 
-        const paramsEmpId = props.match.params.Employee_id;
+        const paramsEmpId = props.match.params.empId;
         const currentFormMode = paramsEmpId ? formMode.EDIT : formMode.NEW;
 
         this.state = {
@@ -124,7 +124,7 @@ class EmployeeForm extends Component {
 
             } else if (currentFormMode === formMode.EDIT) {
                 console.log(emp);
-                const empId = this.state.Employee_id;
+                const empId = this.state.empId;
                 promise = updateEmployeeApiCall(empId, emp);
             }
             if (promise) {
@@ -202,7 +202,7 @@ class EmployeeForm extends Component {
         return (
             <main className={style.main}>
                 <h2>{pageTitle}</h2>
-                <form className={style.form} onSubmit={this.handleSubmit} action={'/employees'}>
+                <form className={style.form} onSubmit={this.handleSubmit} action="/employees">
                     <FormInput
                         type="text"
                         label="Imię "

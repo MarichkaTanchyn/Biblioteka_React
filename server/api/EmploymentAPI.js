@@ -25,7 +25,7 @@ exports.getEmploymentById = (req, res, next) => {
 };
 exports.createEmployment = (req, res, next) => {
     EmploymentRepository.createEmployment(req.body)
-        .then(newobj => {
+        .then(newObj => {
             res.status(201).json(newObj);
         })
         .catch(err => {
