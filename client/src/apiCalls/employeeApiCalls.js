@@ -39,3 +39,15 @@ export function updateEmployeeApiCall(empId, emp) {
     const promise = fetch(url,options);
     return promise;
 }
+
+export  function deleteEmployeeApiCall(empId) {
+    const url = employeeBaseURL + '/' + empId;
+    const options = {
+        method: "DELETE",
+        headers: {
+            "Content-Type": "application/json"
+        },
+    };
+    const promise = fetch(url, options);
+    return promise;
+}

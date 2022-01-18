@@ -1,8 +1,6 @@
 import React, {Component} from "react";
 import formMode from "../../helpers/formHelper";
-
 import {checkRequired, checkTextLengthRange} from "../../helpers/validationCommon";
-import FormInput from "../form/FormInput";
 import FormButtons from "../form/FormButtons";
 import style from "./EmploymentForm.module.css";
 import {Redirect} from "react-router-dom";
@@ -11,10 +9,8 @@ import {
     getEmploymentByIdApiCall,
     updateEmploymentApiCall
 } from "../../apiCalls/employmentApiCall";
-import DepartmentForm from "../departments/DepartmentForm";
-import DepartmentList from "../departments/DepartmentList";
-import Select from "react-select/base";
 import {getDepartmentApiCall} from "../../apiCalls/departmentApiCalls";
+import {getEmployeeApiCall} from "../../apiCalls/employeeApiCalls";
 
 class EmploymentForm extends Component {
 
@@ -22,7 +18,6 @@ class EmploymentForm extends Component {
         super(props);
         const paramsEmplId = props.match.params.emplId;
         const currentFormMode = paramsEmplId ? formMode.EDIT : formMode.NEW;
-
         this.state = {
             emplId: paramsEmplId,
             empl: {
@@ -32,18 +27,61 @@ class EmploymentForm extends Component {
                 PhoneNumber: '',
 
             },
+            emp: [],
+            dept: [],
             errors: {
                 Employee_id: '',
                 Dept_id: '',
                 DataOd: '',
                 PhoneNumber: '',
-
             },
             formMode: currentFormMode,
             redirect: false,
             error: null
         }
+
     }
+
+    fetchEmployeeList = () => {
+        getEmployeeApiCall()
+            .then(res => res.json())
+            .then(
+                (data) => {
+                    this.setState({
+                        isLoaded: true,
+                        employees: data
+                    });
+                },
+                (error) => {
+
+                    this.setState({
+                        isLoaded: true,
+                        error
+                    })
+                }
+            )
+    }
+    fetchDepartmentList = () => {
+        getDepartmentApiCall()
+            .then(res => res.json())
+            .then(
+                (data) => {
+                    console.log("fetch", data);
+                    this.setState({
+                        isLoaded: true,
+                        dept: data
+                    });
+                },
+                (error) => {
+
+                    this.setState({
+                        isLoaded: true,
+                        error
+                    })
+                }
+            )
+    }
+
 
     fetchEmploymentDetails = () => {
         getEmploymentByIdApiCall(this.state.emplId)
@@ -74,14 +112,21 @@ class EmploymentForm extends Component {
     }
     componentDidMount = () => {
         const currentFormMode = this.state.formMode;
+        this.fetchDepartmentList();
+        this.fetchEmployeeList();
         if (currentFormMode === formMode.EDIT) {
             this.fetchEmploymentDetails();
         }
+        console.log(this.state.dept);
+        console.log(this.state.emp);
     }
+
 
     handleChange = (event) => {
         const {name, value} = event.target;
         const empl = {...this.state.empl};
+        const dept = {...this.state.dept};
+        const emp = {...this.state.emp}
         empl[name] = value;
 
         const errorMessage = this.validateField(name, value);
@@ -89,6 +134,8 @@ class EmploymentForm extends Component {
         errors[name] = errorMessage;
 
         this.setState({
+            dept: dept,
+            emp: emp,
             empl: empl,
             errors: errors
         })
@@ -116,13 +163,13 @@ class EmploymentForm extends Component {
         if (isValid) {
             const
                 empl = this.state.empl,
-                dept = this.state.department,
+                dept = this.state.dept,
                 currentFormMode = this.state.formMode;
             let
                 promise,
                 promiseDept,
                 response;
-            // promiseDept = getDepartmentApiCall(dept)
+            promiseDept = getDepartmentApiCall(dept)
             if (currentFormMode === formMode.NEW) {
                 promise = addEmploymentApiCall(empl);
 
@@ -135,6 +182,41 @@ class EmploymentForm extends Component {
                 promise
                     .then(
                         (data) => {
+                            response = data
+                            if (response.status === 201 || response.status === 500) {
+                                return data.json()
+                            }
+                        })
+                    .then(
+                        (data) => {
+                            if (!response.ok && response.status === 500) {
+                                console.log(data)
+                                for (const i in data) {
+                                    const errorItem = data[i]
+                                    const errorMessage = errorItem.message
+                                    const fieldName = errorItem.path
+                                    const errors = {...this.state.errors}
+                                    errors[fieldName] = errorMessage
+                                    this.setState({
+                                        errors: errors,
+                                        error: null
+                                    })
+                                }
+                            } else {
+                                this.setState({redirect: true})
+                            }
+                        },
+                        (error) => {
+                            this.setState({error})
+                            console.log(error)
+                        }
+                    )
+            }
+            if (promiseDept) {
+                promiseDept
+                    .then(
+                        (data) => {
+                            console.log(data);
                             response = data
                             if (response.status === 201 || response.status === 500) {
                                 return data.json()
@@ -207,32 +289,28 @@ class EmploymentForm extends Component {
             <main className={style.main}>
                 <h2>{pageTitle}</h2>
                 <form className={style.form} onSubmit={this.handleSubmit} action="/employments">
+                    {/*<select defaultValue={""} value={"1"} name="Dept_id" id="dept" aria-label="Department "*/}
+                    {/*        onChange={this.handleChange}>*/}
+                    {/*    {this.state.dept.length > 0 && this.state.dept.map(dep =>*/}
+                    {/*        <option value={dep.Dept_id} label={dep.Name} key={dep.Dept_id}/>*/}
+                    {/*    )}*/}
+                    {/*</select>*/}
 
+                    {/*<select defaultValue={""} value={"1"} name="Employee_id" id="emp" aria-label="Pracownik "*/}
+                    {/*        onChange={this.handleChange}>*/}
+                    {/*    {this.state.emp.length > 0 && this.state.emp.map(dep =>*/}
+                    {/*        <option value={dep.Employee_id} label={dep.Name} key={dep.Employee_id}/>*/}
+                    {/*    )}*/}
+                    {/*</select>*/}
 
-                    <Select aria-label={this.state.department.DeptName}
-                            value={this.state.department.Dept_id}
-                            onChange={this.handleChange}
-                    />
-
-                    <FormInput
-                        type="select"
-                        label={this.state.department.DeptName}
-                        required
-                        // error={this.state.errors.Name}
-                        name="DeptName"
-                        placeholder="2-60 znaków"
-                        onChange={this.handleChange}
-                        value={this.state.department.Dept_id}
-                    />
                     {/*<FormInput*/}
-                    {/*    type="select"*/}
+                    {/*    type="Select"*/}
                     {/*    label="Pracownik "*/}
                     {/*    required*/}
-                    {/*    error={this.state.errors.NumOfWorkers}*/}
-                    {/*    name="NumOfWorkers"*/}
-                    {/*    placeholder="1-9"*/}
+                    {/*    name="Worker"*/}
+                    {/*    placeholder="Pracownik"*/}
                     {/*    onChange={this.handleChange}*/}
-                    {/*    value={this.state.dept.NumOfWorkers}*/}
+                    {/*    value={this.state.emp.Employee_id}*/}
                     {/*/>*/}
                     {/*<FormInput*/}
                     {/*    type="number"*/}

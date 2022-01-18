@@ -16,10 +16,10 @@ const DepartmentListTableRow = (props) => {
                         <Link to={`departments/details/${dept.Dept_id}`} className={style['button-details']}>Szczegóły</Link>
                     </li>
                     <li>
-                        <Link to={`departments/edit/${dept.Dept_id}`} className={style['button-edit']} >Edytuj</Link>
+                        <Link to={`/departments/edit/${dept.Dept_id}`} className={style['button-edit']} >Edytuj</Link>
                     </li>
                     <li>
-                        <Link to={`departments/delete/${dept.Dept_id}`} className={style['button-delete']}>Usuń</Link>
+                        <Link to={`/departments/delete/${dept.Dept_id}`} className={style['button-delete']}>Usuń</Link>
                     </li>
                 </ul>
             </td>

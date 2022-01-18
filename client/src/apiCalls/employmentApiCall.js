@@ -2,6 +2,7 @@ const employmentBaseURL = "http://localhost:3000/api/employments";
 
 export function getEmploymentApiCall(){
     const promise = fetch(employmentBaseURL);
+    console.log(promise);
     return promise;
 }
 
@@ -38,5 +39,17 @@ export function updateEmploymentApiCall(emplId, empl) {
         body: emplString
     }
     const promise = fetch(url,options);
+    return promise;
+}
+
+export  function deleteEmploymentApiCall(emplId) {
+    const url = employmentBaseURL + '/' + emplId;
+    const options = {
+        method: "DELETE",
+        headers: {
+            "Content-Type": "application/json"
+        },
+    };
+    const promise = fetch(url, options);
     return promise;
 }

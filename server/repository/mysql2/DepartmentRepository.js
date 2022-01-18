@@ -5,6 +5,7 @@ const {ResultSetHeader} = require("mysql2");
 exports.getDepartments = async () => {
     try {
         return await dbHandler.query('SELECT * FROM Department');
+
     } catch (err) {
         return Promise.reject({
             details: [{

@@ -39,3 +39,16 @@ export function updateDepartmentApiCall(deptId, dept) {
     const promise = fetch(url,options);
     return promise;
 }
+
+export  function deleteDepartmentApiCall(deptId) {
+    const url = departmentBaseURL + '/' + deptId;
+    console.log("ID",deptId);
+    const options = {
+        method: "DELETE",
+        headers: {
+            "Content-Type": "application/json"
+        },
+    };
+    const promise = fetch(url, options);
+    return promise;
+}
