@@ -1,21 +1,23 @@
 import React from "react";
 import style from "./EmploymentList.module.css"
 import EmploymentListTableRow from "./EmploymentListTableRow";
+import {withTranslation} from "react-i18next";
 
 
 const EmploymentListTable = (props) => {
+    const {t} = props;
     const employments = props.emplList;
 
     return (
         <table className={style['table-list']}>
             <thead>
             <tr>
-                <th>Departament</th>
-                <th>Imie</th>
-                <th>Nazwisko</th>
-                <th>Numer Telefonu</th>
-                <th>Data Zatrudnienia</th>
-                <th>Akcje</th>
+                <th>{t('employment.fields.department')}</th>
+                <th>{t('employment.fields.firstName')}</th>
+                <th>{t('employment.fields.lastName')}</th>
+                <th>{t('employment.fields.phoneNumber')}</th>
+                <th>{t('employment.fields.dateOfEmployment')}</th>
+                <th>{t('employment.fields.actions')}</th>
             </tr>
             </thead>
             <tbody>
@@ -26,4 +28,4 @@ const EmploymentListTable = (props) => {
         </table>
     )
 }
-export default EmploymentListTable;
+export default withTranslation() (EmploymentListTable);

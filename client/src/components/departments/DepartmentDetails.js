@@ -4,12 +4,13 @@ import {Link} from "react-router-dom";
 
 import DepartmentDetailsData from "./DepartmentDetailsData";
 import {getDepartmentByIdApiCall} from "../../apiCalls/departmentApiCalls";
+import {withTranslation} from "react-i18next";
 
 class DepartmentDetails extends Component {
     constructor(props) {
         super(props);
         let {deptId} = props.match.params;
-        console.log(2,deptId);
+        console.log(2, deptId);
         this.state = {
             deptId: deptId,
             dept: null,
@@ -47,11 +48,13 @@ class DepartmentDetails extends Component {
                 }
             )
     }
+
     componentDidMount() {
         this.fetchDepartmentDetails()
     }
 
     render() {
+        const {t} = this.props;
         const {dept, error, isLoaded, message} = this.state;
         let content;
 
@@ -67,9 +70,12 @@ class DepartmentDetails extends Component {
 
         return (
             <main className={style.main}>
-                <h2>Szczegóły Departamentów</h2>
+                <h2>{t('dept.list.details')}</h2>
                 {content}
-                <p className="button-submit"><Link to={"/departments"} className={style['a-in-button']} >Powrót</Link></p>
+                <p className="button-submit">
+                    <Link to={"/departments"}
+                          className={style['a-in-button']}>{t('form.actions.return')}</Link>
+                </p>
             </main>
         )
 
@@ -77,4 +83,4 @@ class DepartmentDetails extends Component {
 
 }
 
-export default DepartmentDetails;
+export default withTranslation()(DepartmentDetails);

@@ -3,6 +3,7 @@ import {getEmploymentByIdApiCall} from "../../apiCalls/employmentApiCall";
 import style from "./EmploymentList.module.css";
 import {Link} from "react-router-dom";
 import EmploymentDetailsData from "./EmploymentDetailsData";
+import {withTranslation} from "react-i18next";
 
 
 class EmploymentDetails extends Component {
@@ -52,6 +53,7 @@ class EmploymentDetails extends Component {
     }
 
     render() {
+        const {t} = this.props
         const {empl, error, isLoaded, message} = this.state;
         let content;
 
@@ -68,9 +70,9 @@ class EmploymentDetails extends Component {
 
         return (
             <main className={style.main}>
-                <h2>Szczegóły Zatrudnień</h2>
+                <h2>{t('employment.form.details')}</h2>
                 {content}
-                <p className="button-submit"><Link to={"/employments"} className={style['a-in-button']} >Powrót</Link></p>
+                <p className="button-submit"><Link to={"/employments"} className={style['a-in-button']} >{t('form.actions.return')}</Link></p>
             </main>
         )
 
@@ -78,4 +80,4 @@ class EmploymentDetails extends Component {
 
 }
 
-export default EmploymentDetails;
+export default withTranslation() (EmploymentDetails);

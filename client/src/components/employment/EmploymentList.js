@@ -3,6 +3,7 @@ import style from "./EmploymentList.module.css";
 import EmploymentListTable from "./EmploymentListTable";
 import {Link} from "react-router-dom";
 import {getEmploymentApiCall} from "../../apiCalls/employmentApiCall";
+import {withTranslation} from "react-i18next";
 
 
 class EmploymentList extends Component {
@@ -38,6 +39,7 @@ class EmploymentList extends Component {
         this.fetchEmploymentList();
     }
     render() {
+        const {t} = this.props;
         const {error, isLoaded, employments } = this.state;
         let content;
         if (error) {
@@ -49,12 +51,14 @@ class EmploymentList extends Component {
         }
 
         return <main className={style.main}>
-            <h2>Lista zatrudnień</h2>
+            <h2>{t('employment.list.title')}</h2>
             {content}
-            <p className="button-submit"><Link className={style['a-in-button']} to={"/employments/add"}>Dodaj nowe zatrudnienie</Link></p>
+            <p className="button-submit"><Link
+                className={style['a-in-button']}
+                to={"/employments/add"}>{t('employment.form.add.bntLabel')}</Link></p>
 
         </main>
     }
 }
 
-export default EmploymentList;
+export default withTranslation() (EmploymentList);

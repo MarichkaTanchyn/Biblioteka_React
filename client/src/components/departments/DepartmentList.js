@@ -3,6 +3,7 @@ import style from "./Department.module.css";
 import {getDepartmentApiCall} from "../../apiCalls/departmentApiCalls";
 import DepartmentListTable from "./DepartmentListTable";
 import {Link} from "react-router-dom";
+import {withTranslation} from "react-i18next";
 
 class DepartmentList extends Component {
     constructor(props) {
@@ -39,6 +40,7 @@ class DepartmentList extends Component {
     }
 
     render() {
+        const {t} = this.props;
         const {error, isLoaded, departments} = this.state;
         let content;
         if (error) {
@@ -50,13 +52,13 @@ class DepartmentList extends Component {
         }
 
         return <main className={style.main}>
-            <h2>Lista departamentów</h2>
+            <h2>{t('dept.list.title')}</h2>
             {content}
-            <p className="button-submit"><Link className={style['a-in-button']} to={"/departments/add"}>Dodaj nowy
-                departament</Link></p>
+            <p className="button-submit"><Link className={style['a-in-button']}
+                                               to={"/departments/add"}>{t('dept.list.addNew')}</Link></p>
 
         </main>
     }
 }
 
-export default DepartmentList;
+export default withTranslation() (DepartmentList);

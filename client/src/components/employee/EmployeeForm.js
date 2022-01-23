@@ -6,6 +6,7 @@ import FormInput from "../form/FormInput";
 import FormButtons from "../form/FormButtons";
 import style from "./EmployeeForm.module.css";
 import {Redirect} from "react-router-dom";
+import {withTranslation} from "react-i18next";
 
 class EmployeeForm extends Component {
     constructor(props) {
@@ -179,6 +180,7 @@ class EmployeeForm extends Component {
     }
 
     render() {
+        const {t} = this.props;
         const { redirect } = this.state
         if (redirect) {
             const currentFormMode = this.state.formMode
@@ -195,7 +197,7 @@ class EmployeeForm extends Component {
 
         const errorsSummary = this.hasErrors ? 'Formularz zawiera błędy' : ''
         const fetchError = this.state.error ? `Błąd: ${this.state.error.message}` : ''
-        const pageTitle = this.state.formMode === formMode.NEW ? 'Nowy pracownik' : 'Edycja pracownika'
+        const pageTitle = this.state.formMode === formMode.NEW ? t('emp.form.add.pageTitle') : t('emp.form.edit.pageTitle')
 
         const globalErrorMessage = errorsSummary || fetchError || this.state.message
 
@@ -205,33 +207,33 @@ class EmployeeForm extends Component {
                 <form className={style.form} onSubmit={this.handleSubmit} action="/employees">
                     <FormInput
                         type="text"
-                        label="Imię "
+                        label={t('emp.fields.firstName')}
                         required
-                        error={this.state.errors.firstName}
+                        error={this.state.errors.Name}
                         name="Name"
                         placeholder="2-60 znaków"
                         onChange={this.handleChange}
-                        value={this.state.emp.firstName}
+                        value={this.state.emp.Name}
                     />
                     <FormInput
                         type="text"
-                        label="Nazwisko "
+                        label={t('emp.fields.lastName')}
                         required
-                        error={this.state.errors.lastName}
+                        error={this.state.errors.LastName}
                         name="LastName"
                         placeholder="2-60 znaków"
                         onChange={this.handleChange}
-                        value={this.state.emp.lastName}
+                        value={this.state.emp.LastName}
                     />
                     <FormInput
                         type="text"
-                        label="Email "
+                        label={t('emp.fields.email')}
                         required
                         error={this.state.errors.email}
                         name="Email"
                         placeholder="np. nazwa@domena.pl"
                         onChange={this.handleChange}
-                        value={this.state.emp.email}
+                        value={this.state.emp.Email}
                     />
                     <FormButtons
                         formMode={this.state.formMode}
@@ -245,4 +247,4 @@ class EmployeeForm extends Component {
 
 }
 
-export default EmployeeForm;
+export default withTranslation() (EmployeeForm);

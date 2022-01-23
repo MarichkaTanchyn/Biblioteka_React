@@ -26,8 +26,9 @@
 	"form": {
 		"actions": {
 			"return": "Powrót",
-			"edit": "Edytuj",
-			"cancel": "Anuluj"
+			"edit": "Podtwierdz",
+			"cancel": "Anuluj",
+			"add": "Dodaj"
 		}
 	},
 	"emp": {
@@ -42,10 +43,15 @@
 			"title": "Pracownicy",
 			"addNew": "Dodaj nowego pracownika",
 			"noData": "Brak pracowników w bazie",
-			"pageTitle": "Lista pracowników"
+			"pageTitle": "Lista pracowników",
+			"employment": "Historia zatrudnienia",
+			"firstName": "Imię: ",
+			"lastName": "Nazwisko: ",
+			"email": "Email: ",
+			"details": "Szczegóły zatrudnienia"
 		},
 		"form": {
-			"employment": "Historia zatrudnienia",
+
 			"add": {
 				"pageTitle": "Dodawanie pracownika",
 				"btnLabel": "Dodaj pracownika",
@@ -71,6 +77,7 @@
 	"dept": {
 		"fields": {
 			"name": "Nazwa",
+			"numberOfWorkers": "Ilość pracowników",
 			"dateOfCreate": "Data Stworzenia",
 			"actions": "Akcje"
 		},
@@ -78,11 +85,15 @@
 			"title": "Departamenty",
 			"addNew": "Dodaj nowy departament",
 			"noData": "Brak departamentów w bazie",
-			"pageTitle": "Lista departamentów"
+			"pageTitle": "Lista departamentów",
+			"details": "Szczegóły departamentu"
 		},
 		"form": {
 			"name": "Nazwa:",
+			"dateOfCreate": "Data Stworzenia:",
 			"numOfWorkers": "Ilość Pracujących:",
+			"dateOfStart": "Data Startu",
+			"maxNumberOfWorkers" : "Max ilość pracowników",
 			"date": "Data Zatrudnienia:",
 			"phoneNumber": "Numer Telefonu:",
 			"add": {
@@ -127,6 +138,9 @@
 			"employee": "Pracownik: ",
 			"phoneNumber": "Numer Telefonu: ",
 			"date": "Data: ",
+			"details": "Szczegóły zatrudnienia",
+			"detailsEmp": "Szczegóły pracownika",
+
 			"add": {
 				"pageTitle": "Dodawanie zatrudnienia",
 				"btnLabel": "Dodaj zatrudnienie",

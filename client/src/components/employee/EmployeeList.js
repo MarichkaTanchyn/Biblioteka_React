@@ -3,6 +3,7 @@ import style from "./EmployeeList.module.css";
 import {getEmployeeApiCall} from "../../apiCalls/employeeApiCalls";
 import EmployeeListTable from "./EmployeeListTable";
 import {Link} from "react-router-dom";
+import {withTranslation} from "react-i18next";
 
 class EmployeeList extends Component {
     constructor(props) {
@@ -41,6 +42,7 @@ class EmployeeList extends Component {
     }
 
     render() {
+        const {t} = this.props;
         const {error, isLoaded, employees} = this.state;
         let content;
         if (error) {
@@ -52,14 +54,15 @@ class EmployeeList extends Component {
         }
 
         return <main className={style.main}>
-            <h2>Lista pracowników</h2>
+            <h2>{t('emp.list.title')}</h2>
             {content}
             <p>{this.state.notice}</p>
-            <p className="button-submit"><Link className={style['a-in-button']} to={"/employees/add"}>Dodaj nowego
-                pracownika</Link></p>
+            <p className="button-submit"><Link className={style['a-in-button']}
+                                               to={"/employees/add"}>
+                {t('emp.list.addNew')}</Link></p>
 
         </main>
     }
 }
 
-export default EmployeeList;
+export default withTranslation() (EmployeeList);

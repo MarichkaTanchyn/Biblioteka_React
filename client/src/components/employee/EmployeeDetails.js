@@ -3,12 +3,12 @@ import {getEmployeeByIdApiCall} from "../../apiCalls/employeeApiCalls";
 import style from "../departments/Department.module.css";
 import {Link} from "react-router-dom";
 import EmployeeDetailsData from "./EmployeeDetailsData";
+import {withTranslation} from "react-i18next";
 
 class EmployeeDetails extends Component {
     constructor(props) {
         super(props);
         let {Employee_id} = props.match.params;
-        console.log(2,Employee_id);
         this.state = {
             Employee_id: Employee_id,
             emp: null,
@@ -46,11 +46,13 @@ class EmployeeDetails extends Component {
                 }
             )
     }
+
     componentDidMount() {
         this.fetchEmployeeDetails()
     }
 
     render() {
+        const {t} = this.props;
         const {emp, error, isLoaded, message} = this.state;
         let content;
 
@@ -61,14 +63,20 @@ class EmployeeDetails extends Component {
         } else if (message) {
             content = <p>{message}</p>
         } else {
+            console.log("details", emp);
             content = <EmployeeDetailsData empData={emp}/>
         }
 
         return (
             <main className={style.main}>
-                <h2>Szczegóły Pracowników</h2>
+                <h2>{t('emp.form.edit.pageTitle')}</h2>
                 {content}
-                <p className="button-submit"><Link to={"/employees"} className={style['a-in-button']} >Powrót</Link></p>
+                <p className="button-submit">
+                    <Link to={"/employees"}
+                          className={style['a-in-button']}>
+                        {t('form.actions.return')}
+                    </Link>
+                </p>
             </main>
         )
 
@@ -76,4 +84,4 @@ class EmployeeDetails extends Component {
 
 }
 
-export default EmployeeDetails;
+export default withTranslation() (EmployeeDetails);

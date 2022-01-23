@@ -5,12 +5,12 @@ import FormButtons from "../form/FormButtons";
 import style from "./EmploymentForm.module.css";
 import {Redirect} from "react-router-dom";
 import {
-    addEmploymentApiCall,
+    addEmploymentApiCall, getEmployeesAndDepartments, getEmploymentApiCall,
     getEmploymentByIdApiCall,
     updateEmploymentApiCall
 } from "../../apiCalls/employmentApiCall";
-import {getDepartmentApiCall} from "../../apiCalls/departmentApiCalls";
-import {getEmployeeApiCall} from "../../apiCalls/employeeApiCalls";
+import FormInput from "../form/FormInput";
+import {withTranslation} from "react-i18next";
 
 class EmploymentForm extends Component {
 
@@ -20,18 +20,27 @@ class EmploymentForm extends Component {
         const currentFormMode = paramsEmplId ? formMode.EDIT : formMode.NEW;
         this.state = {
             emplId: paramsEmplId,
-            empl: {
-                Employee_id: '',
-                Dept_id: '',
+            employment: {
+                id: '',
+                emp_id: '',
+                dept_id: '',
                 DataOd: '',
                 PhoneNumber: '',
-
+                employee: {
+                    EmpName: '',
+                    LastName: '',
+                    Email: '',
+                },
+                department: {
+                    DeptName: '',
+                    NumOfWorkers: '',
+                    DateOfStart: '',
+                },
+                employees: [],
+                departments: []
             },
-            emp: [],
-            dept: [],
+
             errors: {
-                Employee_id: '',
-                Dept_id: '',
                 DataOd: '',
                 PhoneNumber: '',
             },
@@ -39,62 +48,20 @@ class EmploymentForm extends Component {
             redirect: false,
             error: null
         }
-
     }
-
-    fetchEmployeeList = () => {
-        getEmployeeApiCall()
-            .then(res => res.json())
-            .then(
-                (data) => {
-                    this.setState({
-                        isLoaded: true,
-                        employees: data
-                    });
-                },
-                (error) => {
-
-                    this.setState({
-                        isLoaded: true,
-                        error
-                    })
-                }
-            )
-    }
-    fetchDepartmentList = () => {
-        getDepartmentApiCall()
-            .then(res => res.json())
-            .then(
-                (data) => {
-                    console.log("fetch", data);
-                    this.setState({
-                        isLoaded: true,
-                        dept: data
-                    });
-                },
-                (error) => {
-
-                    this.setState({
-                        isLoaded: true,
-                        error
-                    })
-                }
-            )
-    }
-
 
     fetchEmploymentDetails = () => {
         getEmploymentByIdApiCall(this.state.emplId)
             .then(res => res.json())
             .then(
                 (data) => {
-                    if (data.message) {
+                    if (data.message != null) {
                         this.setState({
                             message: data.message
                         })
                     } else {
                         this.setState({
-                            empl: data,
+                            employment: data,
                             message: null
                         })
                     }
@@ -109,34 +76,27 @@ class EmploymentForm extends Component {
                     })
                 }
             )
+
     }
     componentDidMount = () => {
-        const currentFormMode = this.state.formMode;
-        this.fetchDepartmentList();
-        this.fetchEmployeeList();
-        if (currentFormMode === formMode.EDIT) {
-            this.fetchEmploymentDetails();
-        }
-        console.log(this.state.dept);
-        console.log(this.state.emp);
+        this.fetchEmploymentDetails();
     }
-
 
     handleChange = (event) => {
         const {name, value} = event.target;
-        const empl = {...this.state.empl};
-        const dept = {...this.state.dept};
-        const emp = {...this.state.emp}
-        empl[name] = value;
+        const employment = {...this.state.employment};
 
+        if (name === 'emp_id' || name === "id" || name === "dept_id") {
+            employment[name] = parseInt(value);
+        } else {
+            employment[name] = value;
+        }
         const errorMessage = this.validateField(name, value);
         const errors = {...this.state.errors};
         errors[name] = errorMessage;
 
         this.setState({
-            dept: dept,
-            emp: emp,
-            empl: empl,
+            employment: employment,
             errors: errors
         })
     }
@@ -147,10 +107,10 @@ class EmploymentForm extends Component {
             if (!checkRequired(fieldValue)) {
                 errorMessage = 'Pole jest wymagane';
             } else if (!checkTextLengthRange(fieldValue, 8, 8)) {
-                errorMessage = 'Pole może zawierać 8 cyfr'
+                errorMessage = 'Numer telefonu ma zawierać 8 cyfr'
             }
         }
-        if (fieldName === 'Data') {
+        if (fieldName === 'DataOd') {
             if (!checkRequired(fieldValue)) {
                 errorMessage = 'Pole jest wymagane';
             }
@@ -162,21 +122,18 @@ class EmploymentForm extends Component {
         const isValid = this.validateForm()
         if (isValid) {
             const
-                empl = this.state.empl,
-                dept = this.state.dept,
+                employment = this.state.employment,
                 currentFormMode = this.state.formMode;
             let
                 promise,
-                promiseDept,
                 response;
-            promiseDept = getDepartmentApiCall(dept)
             if (currentFormMode === formMode.NEW) {
-                promise = addEmploymentApiCall(empl);
+                promise = addEmploymentApiCall(employment);
 
             } else if (currentFormMode === formMode.EDIT) {
-                console.log(empl);
-                const emplId = this.state.emplId;
-                promise = updateEmploymentApiCall(emplId, empl);
+                console.log(employment);
+                const emplId = this.state.employment.id;
+                promise = updateEmploymentApiCall(emplId, employment);
             }
             if (promise) {
                 promise
@@ -212,59 +169,34 @@ class EmploymentForm extends Component {
                         }
                     )
             }
-            if (promiseDept) {
-                promiseDept
-                    .then(
-                        (data) => {
-                            console.log(data);
-                            response = data
-                            if (response.status === 201 || response.status === 500) {
-                                return data.json()
-                            }
-                        })
-                    .then(
-                        (data) => {
-                            if (!response.ok && response.status === 500) {
-                                console.log(data)
-                                for (const i in data) {
-                                    const errorItem = data[i]
-                                    const errorMessage = errorItem.message
-                                    const fieldName = errorItem.path
-                                    const errors = {...this.state.errors}
-                                    errors[fieldName] = errorMessage
-                                    this.setState({
-                                        errors: errors,
-                                        error: null
-                                    })
-                                }
-                            } else {
-                                this.setState({redirect: true})
-                            }
-                        },
-                        (error) => {
-                            this.setState({error})
-                            console.log(error)
-                        }
-                    )
-            }
         }
     }
 
     validateForm = () => {
-        const empl = this.state.empl;
+        const employment = this.state.employment;
         const errors = this.state.errors;
-        for (const fieldName in empl) {
-            const fieldValue = empl[fieldName];
+        for (const fieldName in employment) {
+            const fieldValue = employment[fieldName];
             const errorMessage = this.validateField(fieldName, fieldValue);
             errors[fieldName] = errorMessage;
         }
         this.setState({
             errors: errors
         })
-        return !this.hasErrors;
+        return !this.hasErrors();
+    }
+    hasErrors = () => {
+        const errors = this.state.errors;
+        for (const errorField in this.state.errors) {
+            if (errors[errorField].length > 0) {
+                return true;
+            }
+        }
+        return false;
     }
 
     render() {
+        const {t} = this.props;
         const {redirect} = this.state
         if (redirect) {
             const currentFormMode = this.state.formMode
@@ -281,7 +213,7 @@ class EmploymentForm extends Component {
 
         const errorsSummary = this.hasErrors ? 'Formularz zawiera błędy' : ''
         const fetchError = this.state.error ? `Błąd: ${this.state.error.message}` : ''
-        const pageTitle = this.state.formMode === formMode.NEW ? 'Nowe zatrudnienie' : 'Edycja zatrudnienia'
+        const pageTitle = this.state.formMode === formMode.NEW ? t('employment.form.add.pageTitle') : t('employment.form.edit.pageTitle')
 
         const globalErrorMessage = errorsSummary || fetchError || this.state.message
 
@@ -289,53 +221,54 @@ class EmploymentForm extends Component {
             <main className={style.main}>
                 <h2>{pageTitle}</h2>
                 <form className={style.form} onSubmit={this.handleSubmit} action="/employments">
-                    {/*<select defaultValue={""} value={"1"} name="Dept_id" id="dept" aria-label="Department "*/}
-                    {/*        onChange={this.handleChange}>*/}
-                    {/*    {this.state.dept.length > 0 && this.state.dept.map(dep =>*/}
-                    {/*        <option value={dep.Dept_id} label={dep.Name} key={dep.Dept_id}/>*/}
-                    {/*    )}*/}
-                    {/*</select>*/}
 
-                    {/*<select defaultValue={""} value={"1"} name="Employee_id" id="emp" aria-label="Pracownik "*/}
-                    {/*        onChange={this.handleChange}>*/}
-                    {/*    {this.state.emp.length > 0 && this.state.emp.map(dep =>*/}
-                    {/*        <option value={dep.Employee_id} label={dep.Name} key={dep.Employee_id}/>*/}
-                    {/*    )}*/}
-                    {/*</select>*/}
+                    {/*TODO: {t('')}*/}
+                    <label htmlFor="emp_id">{t('employment.form.employee')}<abbr title="required" aria-label="required"
+                                                           className={style.symbolRequired}>*</abbr></label>
+                    <select name="emp_id" id="emp_id" defaultValue={this.state.employment.emp_id}
+                            onChange={this.handleChange} required>
+                        <option value="">Wybierz Pracownika</option>
+                        {this.state.employment.employees.map(employee =>
+                            (<option key={employee.Employee_id}
+                                     value={employee.Employee_id}
+                                     selected={employee.Employee_id == this.state.employment.emp_id}>{employee.Name} {employee.LastName}</option>)
+                        )}
+                    </select>
+                    <label htmlFor="dept_id">{t('employment.form.department')}<abbr title="required" aria-label="required"
+                                                              className={style.symbolRequired}>*</abbr></label>
+                    <select name="dept_id" id="dept_id" defaultValue={this.state.employment.dept_id}
+                            onChange={this.handleChange}  required>
+                        <option value="">Wybierz Departament</option>
+                        {this.state.employment.departments.map(department =>
+                            (<option key={department.Dept_id}
+                                     value={department.Dept_id}
+                                     selected={department.Dept_id == this.state.employment.dept_id}>{department.Name}</option>)
+                        )}
+                    </select>
 
-                    {/*<FormInput*/}
-                    {/*    type="Select"*/}
-                    {/*    label="Pracownik "*/}
-                    {/*    required*/}
-                    {/*    name="Worker"*/}
-                    {/*    placeholder="Pracownik"*/}
-                    {/*    onChange={this.handleChange}*/}
-                    {/*    value={this.state.emp.Employee_id}*/}
-                    {/*/>*/}
-                    {/*<FormInput*/}
-                    {/*    type="number"*/}
-                    {/*    label="Numer Telefonu "*/}
-                    {/*    required*/}
-                    {/*    error={this.state.errors.DateOfStart}*/}
-                    {/*    name="PhoneNumber"*/}
-                    {/*    placeholder="627374828"*/}
-                    {/*    onChange={this.handleChange}*/}
-                    {/*    value={this.state.dept.DateOfStart}*/}
-                    {/*/>*/}
-                    {/*<FormInput*/}
-                    {/*    type="date"*/}
-                    {/*    label="Email "*/}
-                    {/*    required*/}
-                    {/*    error={this.state.errors.DateOfStart}*/}
-                    {/*    name="DateOfStart"*/}
-                    {/*    placeholder="np. nazwa@domena.pl"*/}
-                    {/*    onChange={this.handleChange}*/}
-                    {/*    value={this.state.dept.DateOfStart}*/}
-                    {/*/>*/}
+                    <FormInput
+                        type="number"
+                        label={t('employment.form.phoneNumber')}
+                        required
+                        name="PhoneNumber"
+                        placeholder="627374828"
+                        onChange={this.handleChange}
+                        value={this.state.employment.PhoneNumber}
+                    />
+                    <FormInput
+                        type="date"
+                        label={t('employment.form.date')}
+                        required
+                        // error={this.state.errors.DateOfStart}
+                        name="DataOd"
+                        placeholder="dd/mm/yyyy"
+                        onChange={this.handleChange}
+                        value={this.state.employment.DataOd}
+                    />
                     <FormButtons
                         formMode={this.state.formMode}
                         error={globalErrorMessage}
-                        cancelPath="/departments"
+                        cancelPath="/employments"
                     />
                 </form>
             </main>
@@ -344,4 +277,4 @@ class EmploymentForm extends Component {
 
 }
 
-export default EmploymentForm;
+export default withTranslation() (EmploymentForm);

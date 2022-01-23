@@ -1,8 +1,10 @@
 import React from "react";
 import style from "./EmploymentList.module.css";
 import {Link} from "react-router-dom";
+import {withTranslation} from "react-i18next";
 
 const EmploymentListTableRow = (props) => {
+    const {t} = props;
     const employment = props.emplData;
     const date = new Date(employment.DataOd);
     return (
@@ -16,13 +18,13 @@ const EmploymentListTableRow = (props) => {
                 <ul className={style['list-actions']}>
                     <li>
                         <Link to={`employments/details/${employment.id}`}
-                              className={style['button-details']}>Szczegóły</Link>
+                              className={style['button-details']}>{t('list.actions.details')}</Link>
                     </li>
                     <li>
-                        <Link to={`/employments/edit/${employment.id}`} className={style['button-edit']}>Edytuj</Link>
+                        <Link to={`/employments/edit/${employment.id}`} className={style['button-edit']}>{t('list.actions.edit')}</Link>
                     </li>
                     <li>
-                        <Link to={`/employments/delete/${employment.id}`} className={style['button-delete']}>Usuń</Link>
+                        <Link to={`/employments/delete/${employment.id}`} className={style['button-delete']}>{t('list.actions.delete')}</Link>
                     </li>
                 </ul>
             </td>
@@ -30,4 +32,4 @@ const EmploymentListTableRow = (props) => {
     )
 }
 
-export default EmploymentListTableRow;
+export default withTranslation() (EmploymentListTableRow);

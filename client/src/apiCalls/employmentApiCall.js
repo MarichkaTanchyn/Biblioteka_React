@@ -2,14 +2,20 @@ const employmentBaseURL = "http://localhost:3000/api/employments";
 
 export function getEmploymentApiCall(){
     const promise = fetch(employmentBaseURL);
-    console.log(promise);
+    return promise;
+}
+
+export function getEmployeesAndDepartments() {
+    const promise = fetch(employmentBaseURL + '/emps-and-depts');
     return promise;
 }
 
 export function getEmploymentByIdApiCall(employmentId) {
     const url = employmentBaseURL+'/'+employmentId;
-    console.log(url);
+
     const promise = fetch(url);
+    console.log("URLinAPI", url);
+    console.log("employmentInAPI", promise);
     return promise;
 }
 

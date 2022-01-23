@@ -11,6 +11,7 @@ import {
     getDepartmentByIdApiCall,
     updateDepartmentApiCall
 } from "../../apiCalls/departmentApiCalls";
+import {withTranslation} from "react-i18next";
 
 class DepartmentForm extends Component {
 
@@ -179,6 +180,7 @@ class DepartmentForm extends Component {
     }
 
     render() {
+        const {t} = this.props;
         const {redirect} = this.state
         if (redirect) {
             const currentFormMode = this.state.formMode
@@ -195,7 +197,7 @@ class DepartmentForm extends Component {
 
         const errorsSummary = this.hasErrors ? 'Formularz zawiera błędy' : ''
         const fetchError = this.state.error ? `Błąd: ${this.state.error.message}` : ''
-        const pageTitle = this.state.formMode === formMode.NEW ? 'Nowy departament' : 'Edycja departamentu'
+        const pageTitle = this.state.formMode === formMode.NEW ? t('dept.form.add.pageTitle') : t('dept.form.edit.pageTitle')
 
         const globalErrorMessage = errorsSummary || fetchError || this.state.message
 
@@ -205,7 +207,7 @@ class DepartmentForm extends Component {
                 <form className={style.form} onSubmit={this.handleSubmit} action="/departments">
                     <FormInput
                         type="text"
-                        label="Nazwa "
+                        label={t('dept.form.name')}
                         required
                         error={this.state.errors.Name}
                         name="Name"
@@ -215,7 +217,7 @@ class DepartmentForm extends Component {
                     />
                     <FormInput
                         type="number"
-                        label="Max ilość pracowników "
+                        label={t('dept.form.maxNumberOfWorkers')}
                         required
                         error={this.state.errors.NumOfWorkers}
                         name="NumOfWorkers"
@@ -225,7 +227,7 @@ class DepartmentForm extends Component {
                     />
                     <FormInput
                         type="date"
-                        label="Data Startu "
+                        label={t('dept.form.dateOfStart')}
                         required
                         error={this.state.errors.DateOfStart}
                         name="DateOfStart"
@@ -245,4 +247,4 @@ class DepartmentForm extends Component {
 
 }
 
-export default DepartmentForm;
+export default withTranslation() (DepartmentForm);

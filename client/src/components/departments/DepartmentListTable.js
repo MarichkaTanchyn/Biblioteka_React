@@ -1,19 +1,21 @@
 import React from "react";
 import style from "./Department.module.css";
 import DepartmentListTableRow from "./DepartmentListTableRow";
+import {withTranslation} from "react-i18next";
 
 
 const DepartmentListTable = (props) => {
+    const {t} = props;
     const departments = props.deptList;
     console.log(departments);
     return (
         <table className={style['table-list']}>
             <thead>
             <tr>
-                <th>Nazwa</th>
-                <th>Ilość Pracowników</th>
-                <th>Data Od</th>
-                <th>Akcje</th>
+                <th>{t('dept.fields.name')}</th>
+                <th>{t('dept.fields.numberOfWorkers')}</th>
+                <th>{t('dept.fields.dateOfCreate')}</th>
+                <th>{t('dept.fields.actions')}</th>
             </tr>
             </thead>
             <tbody>
@@ -24,4 +26,4 @@ const DepartmentListTable = (props) => {
         </table>
     )
 }
-export default DepartmentListTable;
+export default withTranslation() (DepartmentListTable);
