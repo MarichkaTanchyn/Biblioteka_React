@@ -231,7 +231,7 @@ class EmploymentForm extends Component {
                         {this.state.employment.employees.map(employee =>
                             (<option key={employee.Employee_id}
                                      value={employee.Employee_id}
-                                     selected={employee.Employee_id == this.state.employment.emp_id}>{employee.Name} {employee.LastName}</option>)
+                                     selected={employee.Employee_id === this.state.employment.emp_id}>{employee.Name} {employee.LastName}</option>)
                         )}
                     </select>
                     <label htmlFor="dept_id">{t('employment.form.department')}<abbr title="required" aria-label="required"
@@ -242,7 +242,7 @@ class EmploymentForm extends Component {
                         {this.state.employment.departments.map(department =>
                             (<option key={department.Dept_id}
                                      value={department.Dept_id}
-                                     selected={department.Dept_id == this.state.employment.dept_id}>{department.Name}</option>)
+                                     selected={department.Dept_id === this.state.employment.dept_id}>{department.Name}</option>)
                         )}
                     </select>
 

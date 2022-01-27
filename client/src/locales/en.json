@@ -27,7 +27,8 @@
 		"actions": {
 			"return": "Return",
 			"edit": "Edit",
-			"cancel": "Cancel"
+			"cancel": "Cancel",
+			"add": "Add"
 		}
 	},
 	"emp": {
@@ -42,7 +43,12 @@
 			"title": "Employees",
 			"addNew": "Add new employee",
 			"noData": "No employees in database",
-			"pageTitle": "List of employees"
+			"pageTitle": "List of employees",
+			"employment": "Employment history",
+			"firstName": "Name: ",
+			"lastName": "LastName: ",
+			"email": "Email: ",
+			"details": "Employment details"
 		},
 		"form": {
 			"employment": "History of employment",
@@ -71,10 +77,9 @@
 	},
 	"dept": {
 		"fields": {
-			"Name": "Name",
+			"name": "Name",
 			"dateOfCreate": "Date Of Create",
-			"actions": "Akcje",
-			"name": "dept.fields.name"
+			"actions": "Akcje"
 		},
 		"list": {
 			"title": "Departments",
@@ -87,6 +92,8 @@
 			"numOfWorkers": "Number Of Workers:",
 			"date": "Employment Date:",
 			"phoneNumber": "Phone Number:",
+			"dateOfStart": "Date of Start",
+			"maxNumberOfWorkers" : "Max number of workers",
 			"add": {
 				"pageTitle": "Adding a new department",
 				"bntLabel": "Add the department",
@@ -101,8 +108,7 @@
 				"confirm": {
 					"header": "Confirmation",
 					"text": "The department has been successfully updated"
-				},
-				"bntLabel": "dept.form.edit.bntLabel"
+				}
 			}
 		}
 	},
@@ -128,6 +134,8 @@
 			"employee": "Employee: ",
 			"phoneNumber": "Phone Number",
 			"date": "Date: ",
+			"details": "Employment details",
+			"detailsEmp": "Employees details",
 			"add": {
 				"pageTitle": "Adding a new employment",
 				"confirm": {
