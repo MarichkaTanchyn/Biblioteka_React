@@ -9,7 +9,7 @@ const empApiRouter = require('./routes/api/EmployeeApiRoute');
 const emplApiRouter = require('./routes/api/EmploymentApiRoute');
 const deptApiRouter = require('./routes/api/DepartmentApiRoute');
 const cors = require('cors');
-
+const authApiRouter = require('./routes/api/AuthApiRoute');
 
 var app = express();
 
@@ -19,20 +19,7 @@ app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 app.use(cookieParser());
 
-// app.use(session({
-//     secret: "my_secret_password",
-//     resave: false,
-//     saveUninitialized : true
-// }));
 
-// app.use((req, res, next) => {
-//     const loggedUser = req.session.loggedUser;
-//     res.locals.loggedUser = loggedUser;
-//     if (!res.locals.loginError) {
-//         res.locals.loginError = undefined;
-//     }
-//     next();
-// });
 
 app.use(cookieParser('secret'));
 
