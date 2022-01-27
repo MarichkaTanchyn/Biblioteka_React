@@ -2,8 +2,9 @@
 	"main-page": {
 		"content": "Main Page",
 		"loginEmail": "Email:",
-		"loginPassword": "Password:",
+		"loginPassword": "Password",
 		"loggedIn": "Logged in as: ",
+		"logMe": "Log in",
 		"logOut": "Log Out",
 		"login": "Login",
 		"info": "The site is currently in English.",

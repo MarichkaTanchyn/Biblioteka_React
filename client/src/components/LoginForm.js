@@ -1,11 +1,13 @@
 import React from "react";
 import {withTranslation} from "react-i18next";
 import {withRouter} from "react-router-dom";
-import FormInput from "../form/FormInput";
-import FormButtons from "../form/FormButtons";
-import {loginApiCall} from "../../apiCalls/authApiCalls";
-import {checkRequired} from "../../helpers/validationCommon";
-import {formValidationKeys} from "../../helpers/formHelper"
+import FormInput from "./form/FormInput";
+import FormButtons from "./form/FormButtons";
+import {loginApiCall} from "../apiCalls/authApiCalls";
+import {checkRequired} from "../helpers/validationCommon";
+import {formValidationKeys} from "../helpers/formHelper";
+import style from "../components/employee/EmployeeForm.module.css";
+
 
 class LoginForm extends React.Component {
     constructor(props) {
@@ -120,15 +122,15 @@ class LoginForm extends React.Component {
         const globalErrorMessage = errorsSummary || fetchError || this.state.message
 
         return (
-            <main>
+            <main className={style.main}>
                 <div id="login">
-                    <h2>{t('main-page.login')}</h2>
-                    <form className="form" method="post" onSubmit={this.handleSubmit}>
+                    <h2>{t('main-page.logMe')}</h2>
+                    <form className={style.form} method="post" onSubmit={this.handleSubmit}>
                         <FormInput
                             name="name"
                             value={this.state.user.name}
                             error={this.state.errors.name}
-                            label={t('main-page.loginClub')}
+                            label={t('main-page.login')}
                             onChange={this.handleChange}
                             type="text"
                         />

@@ -1,10 +1,10 @@
 import React from "react";
 import {Redirect} from "react-router-dom";
-import {isAuthenticated} from "../../helpers/authHelper";
+import {isAuthenticated} from "../helpers/authHelper";
 
 class ProtectedRoute extends React.Component {
     render() {
-        const Component = this.props.component
+        const Component = this.props;
         return isAuthenticated() ? (
             <Component/>
         ) : (
