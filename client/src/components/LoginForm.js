@@ -14,12 +14,12 @@ class LoginForm extends React.Component {
         super(props);
         this.state = {
             user: {
-                name: '',
-                password: ''
+                Email: '',
+                Password: ''
             },
             errors: {
-                name: '',
-                password: ''
+                Email: '',
+                Password: ''
             },
             error: '',
             message: '',
@@ -78,12 +78,12 @@ class LoginForm extends React.Component {
 
     validateField = (fieldName, fieldValue) => {
         let errorMessage = ''
-        if (fieldName === 'name') {
+        if (fieldName === 'Email') {
             if (!checkRequired(fieldValue)) {
                 errorMessage = formValidationKeys.notEmpty
             }
         }
-        if (fieldName === 'password') {
+        if (fieldName === 'Password') {
             if (!checkRequired(fieldValue)) {
                 errorMessage = formValidationKeys.notEmpty
             }
@@ -125,19 +125,21 @@ class LoginForm extends React.Component {
             <main className={style.main}>
                 <div id="login">
                     <h2>{t('main-page.logMe')}</h2>
-                    <form className={style.form} method="post" onSubmit={this.handleSubmit}>
+                    <form className={style.form} onSubmit={this.handleSubmit} action="/employees">
                         <FormInput
-                            name="name"
-                            value={this.state.user.name}
-                            error={this.state.errors.name}
+                            name="Email"
+                            required
+                            value={this.state.user.Email}
+                            error={this.state.errors.Email}
                             label={t('main-page.login')}
                             onChange={this.handleChange}
                             type="text"
                         />
                         <FormInput
-                            name="password"
-                            value={this.state.user.password}
-                            error={this.state.errors.password}
+                            name="Password"
+                            reqired
+                            value={this.state.user.Password}
+                            error={this.state.errors.Password}
                             label={t('main-page.loginPassword')}
                             onChange={this.handleChange}
                             type="password"

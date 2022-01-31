@@ -5,7 +5,7 @@ import FormButtons from "../form/FormButtons";
 import style from "./EmploymentForm.module.css";
 import {Redirect} from "react-router-dom";
 import {
-    addEmploymentApiCall, getEmployeesAndDepartments, getEmploymentApiCall,
+    addEmploymentApiCall,
     getEmploymentByIdApiCall,
     updateEmploymentApiCall
 } from "../../apiCalls/employmentApiCall";
@@ -222,7 +222,6 @@ class EmploymentForm extends Component {
                 <h2>{pageTitle}</h2>
                 <form className={style.form} onSubmit={this.handleSubmit} action="/employments">
 
-                    {/*TODO: {t('')}*/}
                     <label htmlFor="emp_id">{t('employment.form.employee')}<abbr title="required" aria-label="required"
                                                            className={style.symbolRequired}>*</abbr></label>
                     <select name="emp_id" id="emp_id" defaultValue={this.state.employment.emp_id}
@@ -250,6 +249,7 @@ class EmploymentForm extends Component {
                         type="number"
                         label={t('employment.form.phoneNumber')}
                         required
+                        error={this.state.errors.PhoneNumber}
                         name="PhoneNumber"
                         placeholder="627374828"
                         onChange={this.handleChange}
@@ -259,11 +259,11 @@ class EmploymentForm extends Component {
                         type="date"
                         label={t('employment.form.date')}
                         required
-                        // error={this.state.errors.DateOfStart}
+                        error={this.state.errors.DataOd}
                         name="DataOd"
                         placeholder="dd/mm/yyyy"
                         onChange={this.handleChange}
-                        value={this.state.employment.DataOd}
+                        value={(this.state.employment.DataOd)}
                     />
                     <FormButtons
                         formMode={this.state.formMode}

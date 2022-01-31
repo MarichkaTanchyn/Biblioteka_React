@@ -4,7 +4,7 @@ import {isAuthenticated} from "../helpers/authHelper";
 
 class ProtectedRoute extends React.Component {
     render() {
-        const Component = this.props;
+        const Component = this.props.component;
         return isAuthenticated() ? (
             <Component/>
         ) : (

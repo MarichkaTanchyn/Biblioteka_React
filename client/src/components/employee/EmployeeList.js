@@ -8,12 +8,10 @@ import {withTranslation} from "react-i18next";
 class EmployeeList extends Component {
     constructor(props) {
         super(props);
-        let notice = props.location.state && props.location.state.notice ? props.location.state.notice : '';
         this.state = {
             error: null,
             isLoaded: false,
             employees: [],
-            notice: notice
         }
     }
 

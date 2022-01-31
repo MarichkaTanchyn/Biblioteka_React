@@ -35,17 +35,17 @@ const deptSchema = Joi.object({
     id: Joi.number()
         .optional()
         .allow(""),
-    name: Joi.string()
+    Name: Joi.string()
         .min(2)
         .max(60)
         .required()
         .error(errMessages),
-    amountofEmp: Joi.number()
+    NumOfWorkers: Joi.number()
         .min(1)
         .max(10)
         .required()
         .error(errMessages),
-    dateOfStart: Joi.date()
+    DateOfStart: Joi.date()
         .min(2000)
         .max("now")
         .required()

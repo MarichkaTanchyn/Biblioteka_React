@@ -1,4 +1,5 @@
 const dbHandler = require('../../util/db');
+const emplSchema = require("../../model/joi/Employment");
 // const emplSchema = require("../../model/joi/Employment");
 
 
@@ -168,11 +169,11 @@ exports.getEmploymentById = async (employmentId) => {
 
 exports.createEmployment = async (newEmploymentData) => {
     try {
-        // const vRes = emplSchema.validate(newEmploymentData, {abortEarly: false});
-        // if (vRes.error) {
-        //     console.log(newEmploymentData.telNum);
-        //     return Promise.reject(vRes.error);
-        // }
+        const vRes = emplSchema.validate(newEmploymentData[0], {abortEarly: false});
+        if (vRes.error) {
+            console.log(newEmploymentData);
+            return Promise.reject(vRes.error);
+        }
         const emp_Id = newEmploymentData.emp_id;
         const dept_Id = newEmploymentData.dept_id;
         const dataOd = newEmploymentData.DataOd;
@@ -198,14 +199,15 @@ exports.createEmployment = async (newEmploymentData) => {
 
 exports.updateEmployment = async (emplId, emplDate) => {
     try {
-        // const vRes = emplSchema.validate(emplDate, {abortEarly: false});
-        // if (vRes.error) {
-        //     return Promise.reject(vRes.error);
-        // }
-        const emp_Id = emplDate.emp_Id;
-        const dept_Id = emplDate.deptId;
+        console.log(emplDate);
+        const vRes = emplSchema.validate(emplDate[0], {abortEarly: false});
+        if (vRes.error) {
+            return Promise.reject(vRes.error);
+        }
+        const emp_Id = emplDate.emp_id;
+        const dept_Id = emplDate.dept_id;
         const dataOd = emplDate.DataOd;
-        const phoneNumber = emplDate.telNum;
+        const phoneNumber = emplDate.PhoneNumber;
         return await dbHandler.execute(
             "UPDATE Employment SET Employee_id = ?, Dept_id = ?, DataOd = ?, PhoneNumber = ? WHERE Employment_id = ?;",
             [emp_Id, dept_Id, dataOd, phoneNumber, emplId]);

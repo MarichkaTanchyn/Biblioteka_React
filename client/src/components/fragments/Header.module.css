@@ -19,6 +19,10 @@ header {
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
     z-index: 10;
 }
+header div {
+    margin: 0;
+    padding: 0;
+}
 .main-image {
     width: 100%;
     height: 25rem;
@@ -39,9 +43,57 @@ header {
 .main-header {
     display: flex;
     flex-direction: row;
-    justify-content: left;
+    justify-content: space-between;
     align-items: center;
     margin-left: 3rem;
+}
+
+.header-display {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.navbar {
+    padding: 0;
+    overflow: hidden;
+    list-style-type: none;
+    margin-top: 0;
+}
+
+.navbar ul {
+    display: flex;
+    text-decoration: none;
+    list-style: none;
+    /*width: 100%;*/
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.navbar ul li {
+    outline: none;
+    padding: 0 1rem;
+}
+.button{
+    padding: 5px;
+}
+.navbar ul li a {
+    text-decoration: none;
+    color: black;
+}
+
+.list-actions{
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin-right: 1rem;
+}
+.list-actions li {
+    display: inline-block;
 }
 
 @media all and (max-width: 780px) {

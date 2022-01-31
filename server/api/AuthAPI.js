@@ -5,14 +5,14 @@ const EmployeeRepository = require("../repository/mysql2/EmployeeRepository");
 
 exports.login = (req, res) => {
     const email = req.body.Email;
-    const password = req.body.password;
+    const password = req.body.Password;
+
     EmployeeRepository.findByEmail(email)
         .then(emp => {
             if (!emp) {
                 return res.status(401).send({message: "Invalid name or password"})
             }
-
-            bcrypt.compare(password, emp.password)
+            bcrypt.compare(password, emp[0].Password)
                 .then(isEqual => {
                     if (!isEqual) {
                         console.log(isEqual)

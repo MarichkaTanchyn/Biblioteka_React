@@ -5,26 +5,49 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const session = require('express-session');
 
+// const indexRouter = require('./routes/index');
+// const employeeRouter = require('./routes/employeeRoute');
+// const employmentRouter = require('./routes/employmentRoutes');
+// const departmentRouter = require('./routes/departmentRoutes');
 const empApiRouter = require('./routes/api/EmployeeApiRoute');
 const emplApiRouter = require('./routes/api/EmploymentApiRoute');
 const deptApiRouter = require('./routes/api/DepartmentApiRoute');
 const cors = require('cors');
 const authApiRouter = require('./routes/api/AuthApiRoute');
+var bodyParser = require('body-parser')
 
 var app = express();
 
 app.use(cors());
-app.use(logger('dev'));
-app.use(express.json());
-app.use(express.urlencoded({extended: false}));
-app.use(cookieParser());
+app.use(bodyParser.json())
 
-
-
-app.use(cookieParser('secret'));
-
+// view engine setup
+app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
+app.use(logger('dev'));
+app.use(express.json());
+app.use(express.urlencoded({
+    extended: false
+}));
+app.use(cookieParser());
+app.use(express.static(path.join(__dirname, 'public')));
+
+app.use(session({
+    secret: "my_secret_password",
+    resave: false,
+    saveUninitialized: true
+}));
+app.use((req, res, next) => {
+    const loggedUser = req.session.loggedUser;
+    res.locals.loggedUser = loggedUser;
+    if (!res.locals.loginError) {
+        res.locals.loginError = undefined;
+    }
+    next();
+});
+
+app.use(cookieParser('secret'));
 
 const i18n = require('i18n');
 i18n.configure({
@@ -54,12 +77,19 @@ app.use(function(err, req, res, next) {
     res.send('error');//this or res.status(err.status || 500).send('error')
 });
 
+// app.use('/', indexRouter);
+// app.use('/employments', employmentRouter);
+// app.use('/employees', employeeRouter);
+// app.use('/departments', departmentRouter);
+
 app.use('/api/employees', empApiRouter);
 app.use('/api/employments', emplApiRouter);
 app.use('/api/departments', deptApiRouter);
+app.use('/api/auth',authApiRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
+    console.log("Error returned in app.js")
     next(createError(404));
 });
 

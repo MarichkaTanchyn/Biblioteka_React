@@ -21,11 +21,13 @@ class EmployeeForm extends Component {
                 Name: '',
                 LastName: '',
                 Email: '',
+                Password: ''
             },
             errors: {
                 Name: '',
                 LastName: '',
                 Email: '',
+                Password: ''
             },
             formMode: currentFormMode,
             redirect: false,
@@ -106,8 +108,14 @@ class EmployeeForm extends Component {
             } else if (!checkEmail(fieldValue)) {
                 errorMessage = 'Pole powinno zawierać prawidłowy adres email';
             }
+
         }
 
+        if (fieldName === 'password' && this.state.formMode === formMode.NEW) {
+            if (!checkRequired(fieldValue)) {
+                errorMessage = "Field is required";
+            }
+        }
         return errorMessage;
     }
     handleSubmit = (event) => {
@@ -170,7 +178,7 @@ class EmployeeForm extends Component {
         const errors = this.state.errors;
         for (const fieldName in emp) {
             const fieldValue = emp[fieldName];
-            const errorMessage = this.validateField(fieldName,fieldValue);
+            const errorMessage = this.validateField(fieldName, fieldValue);
             errors[fieldName] = errorMessage;
         }
         this.setState({
@@ -181,7 +189,7 @@ class EmployeeForm extends Component {
 
     render() {
         const {t} = this.props;
-        const { redirect } = this.state
+        const {redirect} = this.state
         if (redirect) {
             const currentFormMode = this.state.formMode
             const notice = currentFormMode === formMode.NEW ? 'Pomyślnie dodano nowego pracownika' : 'Pomyślnie zaktualizowano nowego pracownika'
@@ -191,7 +199,7 @@ class EmployeeForm extends Component {
                     state: {
                         notice: notice
                     }
-                }} />
+                }}/>
             )
         }
 
@@ -235,16 +243,26 @@ class EmployeeForm extends Component {
                         onChange={this.handleChange}
                         value={this.state.emp.Email}
                     />
+                    <FormInput
+                        type="password"
+                        label={t('emp.fields.password')}
+                        required
+                        error={this.state.errors.password}
+                        name="Password"
+                        placeholder="Password"
+                        onChange={this.handleChange}
+                        value={this.state.emp.Password}
+                    />
                     <FormButtons
                         formMode={this.state.formMode}
                         error={globalErrorMessage}
                         cancelPath="/employees"
                     />
                 </form>
-            </main >
+            </main>
         )
     }
 
 }
 
-export default withTranslation() (EmployeeForm);
+export default withTranslation()(EmployeeForm);

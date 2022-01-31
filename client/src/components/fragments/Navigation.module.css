@@ -53,7 +53,9 @@ body {
 .navbar ul li.active {
     transform: scale(1.35);
 }
-
+.buttonClick {
+    margin-left: 0;
+}
 @media all and (max-width: 780px) {
     nav ul {
         flex-wrap: wrap;

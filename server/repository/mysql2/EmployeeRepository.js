@@ -20,7 +20,7 @@ exports.getEmployees = async () => {
 exports.getEmployeeById = async (empId) => {
     try {
         const query =
-            "SELECT e.Employee_id as id, e.Name as EmpName, e.LastName, e.Email, empl.Employment_id as empl_id, " +
+            "SELECT e.Employee_id as id, e.Name as EmpName, e.LastName, e.Email, e.Password, empl.Employment_id as empl_id, " +
             "empl.PhoneNumber, empl.DataOd, empl.Dept_id as dept_id, dept.Name as DeptName, dept.NumOfWorkers, dept.DateOfStart " +
             "FROM Employee e " +
             "LEFT JOIN Employment empl on empl.Employee_id = e.Employee_id " +
@@ -85,13 +85,14 @@ exports.createEmployee = async (newEmployeeData) => {
         //     return Promise.reject(emailError);
         // }
 
+        console.log(newEmployeeData);
         const EmpName = newEmployeeData.Name;
         const LastName = newEmployeeData.LastName;
         const Email = newEmployeeData.Email;
-        // const Salt = authUtils.genSaltSync(8);
-        // const Password = authUtils.hashPassword(newEmployeeData.Password, Salt);
-        const sql = "INSERT INTO Employee (Name, LastName, Email) VALUES (?,?,?);"
-        return dbHandler.execute(sql, [EmpName, LastName, Email]);
+        const Salt = authUtils.genSaltSync(8);
+        const Password = authUtils.hashPassword(newEmployeeData.Password, Salt);
+        const sql = "INSERT INTO Employee (Name, LastName, Email, Password) VALUES (?,?,?,?);"
+        return dbHandler.execute(sql, [EmpName, LastName, Email, Password]);
 
     } catch (err) {
         return Promise.reject({
@@ -149,6 +150,7 @@ exports.findByEmail = async (email) => {
     try {
         const sql = 'SELECT * FROM Employee where Email = ?';
         const result =  await dbHandler.execute(sql, [email]);
+        console.log(email);
         return result[0];
     } catch (err) {
         return Promise.reject({

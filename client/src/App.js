@@ -52,7 +52,7 @@ class App extends Component{
 
         return (
             <Router forceRefresh={true}>
-                <Header/>
+                <Header handleLogout={this.handleLogout}/>
                 <Navigation/>
                 <Switch>
                     <Route exact path="/" component={MainContent}/>
@@ -64,13 +64,15 @@ class App extends Component{
                     />
                     <Route exact path="/" component={MainContent}/>
                     <ProtectedRoute exact={true} path="/employees" component={EmployeeList}/>
+                    <Route exact path="/employees" component={EmployeeList}/>
+
                     <Route exact path="/employees/details/:Employee_id" component={EmployeeDetails}/>
                     <Route exact path="/employees/edit/:empId" component={EmployeeForm}/>
                     <Route exact path="/employees/delete/:empId" component={EmployeeDelete}/>
                     <Route exact path="/employees/add" component={EmployeeForm}/>
 
                     <ProtectedRoute exact={true} path="/employments" component={EmploymentList}/>
-                    <Route exact path="/employments" component={EmploymentList}/>
+                    {/*<Route exact path="/employments" component={EmploymentList}/>*/}
                     <Route exact path="/employments/details/:employment_id" component={EmploymentDetails}/>
                     <Route exact path="/employments/edit/:emplId" component={EmploymentForm}/>
                     <Route exact path="/employments/delete/:emplId" component={EmploymentDelete}/>

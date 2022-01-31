@@ -139,13 +139,14 @@ exports.createDepartment = (newDepartmentData) => {
 
 exports.updateDepartment = async (deptId, deptData) => {
     try {
+        console.log(deptData);
         const vRes = deptSchema.validate(deptData, {abortEarly: false});
         if (vRes.error) {
             return Promise.reject(vRes.error);
         }
-        const deptName = deptData.name;
-        const numOfWorkers = deptData.amountofEmp;
-        const dateOfStart = deptData.dateOfStart;
+        const deptName = deptData.Name;
+        const numOfWorkers = deptData.NumOfWorkers;
+        const dateOfStart = deptData.DateOfStart;
 
         const sql = "UPDATE Department SET Name = ?, numOfWorkers = ?, DateOfStart = ? WHERE Dept_id = ?;"
         return await dbHandler.execute(sql, [deptName, numOfWorkers, dateOfStart, deptId]);

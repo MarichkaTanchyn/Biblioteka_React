@@ -3,6 +3,7 @@
 		"content": "Main Page",
 		"loginEmail": "Email:",
 		"loginPassword": "Password",
+		"register": "Register",
 		"loggedIn": "Logged in as: ",
 		"logMe": "Log in",
 		"logOut": "Log Out",
